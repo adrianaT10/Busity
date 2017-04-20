@@ -11,5 +11,8 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>*.html</url-pattern>
 		<url-pattern>/rest</url-pattern>
+		<url-pattern>/register</url-pattern>
+		<url-pattern>/unregister</url-pattern>
+		<url-pattern>/update-location</url-pattern>
 	</servlet-mapping>
 </web-app>  

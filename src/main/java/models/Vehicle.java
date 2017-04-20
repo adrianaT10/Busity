@@ -1,39 +1,41 @@
 package models;
 
-import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "VEHICLES")
-//@IdClass(VehicleKey.class)
+@Table(name = "vehicles")
 public class Vehicle {
-//	@Id
-//	@Column(name = "LINE_NO")
-//	private String lineNo;
 	
 	@ManyToOne
-    @JoinColumn(name = "LINES_LINE_NO")
+    @JoinColumn(name = "line_no")
 	private Line line;
 	
-	
 	@Id
-	@Column(name = "REGISTRATION_NO")
+	@Column(name = "registration_no", unique = true)
 	private String registrationNo;
 	
-	@Column(name = "VEHICLE_TYPE")
+	@Column(name = "vehicle_type")
 	@Enumerated(EnumType.STRING)
 	private VehicleType vehicleType;
 	
 	private String brand;
+	
+	@OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
+	private Set<LogEntry> logEntries = new HashSet<LogEntry>();
+	
+	
 	
 	public Vehicle() {}
 	
@@ -74,11 +76,18 @@ public class Vehicle {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	
-	
-}
 
-class VehicleKey implements Serializable{
-	private Line line;
-	private String registrationNo;
+	public Set<LogEntry> getLogEntries() {
+		return logEntries;
+	}
+
+	public void setLogEntries(Set<LogEntry> logEntries) {
+		this.logEntries = logEntries;
+	}
+	
+	public boolean addLogEntry(LogEntry logEntry) {
+		return this.logEntries.add(logEntry);
+	}
+	
+	
 }

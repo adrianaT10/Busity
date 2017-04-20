@@ -19,12 +19,21 @@ public class VehicleServiceImpl implements VehicleService {
 		return vehicleRepo.findAll();
 	}
 
-	public Optional<Vehicle> getVehicle(String registration) {
+	public Optional<Vehicle> findVehicle(String registration) {
 		return vehicleRepo.findOne(registration);
 	}
 
 	public Vehicle save(Vehicle vehicle) {
 		return vehicleRepo.save(vehicle);
+	}
+
+	public void delete(Vehicle vehicle) {
+		vehicleRepo.delete(vehicle);
+	}
+	
+	public void update(Vehicle updated) {
+		vehicleRepo.updateLine(updated.getRegistrationNo(), updated.getLine());
+		vehicleRepo.flush();
 	}
 
 }

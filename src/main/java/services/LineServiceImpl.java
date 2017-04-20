@@ -1,6 +1,7 @@
 package services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class LineServiceImpl implements LineService {
 	
 	public Line save(Line line) {
 		return lineRepo.save(line);
+	}
+
+	public Optional<Line> findLine(String lineNo) {
+		return lineRepo.findOne(lineNo);
 	}
 
 }
