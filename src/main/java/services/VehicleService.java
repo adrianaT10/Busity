@@ -3,6 +3,7 @@ package services;
 import java.util.List;
 import java.util.Optional;
 
+import models.LogEntry;
 import models.Vehicle;
 
 public interface VehicleService {
@@ -15,4 +16,7 @@ public interface VehicleService {
 	public void delete(Vehicle vehicle);
 	
 	public void update(Vehicle updated);
+	
+	public LogEntry getLastPosition(Vehicle vehicle);
+	
 }

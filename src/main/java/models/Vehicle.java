@@ -1,6 +1,8 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -33,7 +35,7 @@ public class Vehicle {
 	private String brand;
 	
 	@OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
-	private Set<LogEntry> logEntries = new HashSet<LogEntry>();
+	private List<LogEntry> logEntries = new ArrayList<LogEntry>();
 	
 	
 	
@@ -77,11 +79,11 @@ public class Vehicle {
 		this.brand = brand;
 	}
 
-	public Set<LogEntry> getLogEntries() {
+	public List<LogEntry> getLogEntries() {
 		return logEntries;
 	}
 
-	public void setLogEntries(Set<LogEntry> logEntries) {
+	public void setLogEntries(List<LogEntry> logEntries) {
 		this.logEntries = logEntries;
 	}
 	
