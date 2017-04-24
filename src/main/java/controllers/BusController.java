@@ -17,6 +17,10 @@ import services.LineService;
 import services.LogEntryService;
 import services.VehicleService;
 
+/**
+ * @author Adriana Tufa
+ * Controller which handles request from the driver's app
+ */
 @Controller
 @EnableWebMvc
 public class BusController {

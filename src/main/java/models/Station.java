@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import static javax.persistence.GenerationType.AUTO;
 
@@ -17,22 +18,24 @@ import javax.persistence.CascadeType;
 @Entity
 @Table(name = "stations")
 public class Station {
-	
+
 	@Id
 	@GeneratedValue(strategy = AUTO)
 	private Long id;
-	
+
 	private String stationName;
-	
+
 	private double latitude;
-	
+
 	private double longitude;
-	
-	@ManyToMany(cascade = CascadeType.ALL)
+
+	@ManyToMany(targetEntity = Line.class, cascade = CascadeType.ALL)
 	@JoinTable(name = "line_station", joinColumns = @JoinColumn(name = "station_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "line_no", referencedColumnName = "line_no"))
 	private Set<Line> lines = new HashSet<Line>();
-	
-	
+
+	@OneToMany(mappedBy = "station", cascade = CascadeType.ALL)
+	private Set<Awt> waitingTimes = new HashSet<Awt>();
+
 	
 	public Station() {}
 
@@ -42,7 +45,6 @@ public class Station {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -83,8 +85,21 @@ public class Station {
 	public void setLines(Set<Line> lines) {
 		this.lines = lines;
 	}
-	
+
 	public boolean addLine(Line line) {
 		return this.lines.add(line);
 	}
+
+	public Set<Awt> getWaitingTimes() {
+		return waitingTimes;
+	}
+
+	public void setWaitingTimes(Set<Awt> waitingTimes) {
+		this.waitingTimes = waitingTimes;
+	}
+
+	public boolean addAwt(Awt awt) {
+		return this.waitingTimes.add(awt);
+	}
+
 }

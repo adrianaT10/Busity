@@ -24,8 +24,11 @@ public class Line {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "line", cascade = CascadeType.ALL)
 	private Set<Vehicle> vehicles = new HashSet<Vehicle>();
 	
-	@ManyToMany(mappedBy = "lines", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "lines")
 	private Set<Station> stations = new HashSet<Station>();
+	
+	@OneToMany(mappedBy = "line", cascade = CascadeType.ALL)
+	private Set<Awt> waitingTimes = new HashSet<Awt>();
 	
 	
 	
@@ -69,5 +72,17 @@ public class Line {
 	
 	public void removeVehicle(Vehicle v) {
 		this.vehicles.remove(v);
+	}
+
+	public Set<Awt> getWaitingTimes() {
+		return waitingTimes;
+	}
+
+	public void setWaitingTimes(Set<Awt> waitingTimes) {
+		this.waitingTimes = waitingTimes;
+	}
+	
+	public boolean addAwt(Awt awt) {
+		return this.waitingTimes.add(awt);
 	}
 }

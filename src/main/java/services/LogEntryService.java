@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import models.LogEntry;
 
@@ -15,4 +16,6 @@ public interface LogEntryService {
 	public void delete(LogEntry entry);
 
 	public void update(LogEntry entry);
+	
+	public Set<LogEntry> getTodaysEntries();
 }

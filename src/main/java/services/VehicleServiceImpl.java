@@ -38,13 +38,12 @@ public class VehicleServiceImpl implements VehicleService {
 	}
 
 	public LogEntry getLastPosition(Vehicle vehicle) {
-//		System.out.println(vehicle.getLogEntries().size());
-//		LogEntry last = vehicle.getLogEntries().get(0);
 		Vehicle v = vehicleRepo.findByRegistrNoAndFetchLogs(vehicle.getRegistrationNo());
-		System.out.println(v.getLogEntries().size());
+		if (v == null || v.getLogEntries().isEmpty()) 
+			return null;
+		
 		int size = v.getLogEntries().size();
 		LogEntry last = v.getLogEntries().get(size - 1);
-		System.out.println("Time " + last.getPassingTime());
 		
 		return last;
 	}

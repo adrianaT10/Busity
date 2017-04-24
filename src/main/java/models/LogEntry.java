@@ -14,6 +14,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 
+/**
+ * @author Adriana Tufa
+ * Class for keeping location info about vehicles
+ */
 @Entity
 public class LogEntry {
 	
@@ -25,16 +29,15 @@ public class LogEntry {
 	@JoinColumn(name = "registration_no")
 	private Vehicle vehicle;
 	
+	private String lineNo;
+	
 	private double latitude;
 	
 	private double longitude;
 	
-	private String stationName;
-	
 	@Column(name = "passingTime", columnDefinition="DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date passingTime;
-	
 	
 	
 	public LogEntry() {}
@@ -42,6 +45,7 @@ public class LogEntry {
 	public LogEntry(Vehicle vehicle, double latitude, double longitude, Date passingTime) {
 		super();
 		this.vehicle = vehicle;
+		this.lineNo = vehicle.getLine().getLineNo(); //really necessary?
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.passingTime = passingTime;
@@ -63,6 +67,14 @@ public class LogEntry {
 		this.vehicle = vehicle;
 	}
 
+	public String getLineNo() {
+		return lineNo;
+	}
+
+	public void setLineNo(String lineNo) {
+		this.lineNo = lineNo;
+	}
+
 	public double getLatitude() {
 		return latitude;
 	}
@@ -79,14 +91,6 @@ public class LogEntry {
 		this.longitude = longitude;
 	}
 
-	public String getStationName() {
-		return stationName;
-	}
-
-	public void setStationName(String stationName) {
-		this.stationName = stationName;
-	}
-
 	public Date getPassingTime() {
 		return passingTime;
 	}
@@ -95,5 +99,8 @@ public class LogEntry {
 		this.passingTime = passingTime;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return vehicle.getRegistrationNo() + " at " + passingTime + " " + latitude + " " + longitude; 
+	}
 }

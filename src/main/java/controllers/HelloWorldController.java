@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import models.Line;
-import models.Station;
-import models.Vehicle;
-import models.VehicleType;
 import services.LineService;
 import services.StationService;
 import services.VehicleService;
 
+/**
+ * Ignore, just for testinf
+ */
 @Controller
 public class HelloWorldController {
 	
@@ -34,7 +34,7 @@ public class HelloWorldController {
 	
 	@RequestMapping("/rest")
 	@ResponseBody
-	public String getAllPlayedMatches() {
+	public String addSomeData() {
 //	    Line l1 = new Line("1");
 //	    Line l2 = new Line("25");
 //	    

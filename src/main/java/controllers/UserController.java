@@ -17,14 +17,25 @@ import models.Vehicle;
 import services.LineService;
 import services.VehicleService;
 
+/**
+ * @author Adriana Tufa
+ * Controller for handling user requests
+ */
 @Controller
 @EnableWebMvc
 public class UserController {
+	
 	@Autowired
 	private LineService lineService;
 	@Autowired
 	private VehicleService vehicleService;
 	
+	
+	/**
+	 * Get the last position of every vehicle registered on lineNo
+	 * @param lineNo
+	 * @return list of positions
+	 */
 	@RequestMapping("/r/line")
 	@ResponseBody
 	public List<LocationResponse> getLineVehicles(@RequestParam(value="line")String lineNo) {
@@ -40,14 +51,36 @@ public class UserController {
 		for (Vehicle vehicle : vehicles) {
 			System.out.println(vehicle.getRegistrationNo());
 			LogEntry last = vehicleService.getLastPosition(vehicle);
-			System.out.println(last.getPassingTime());
+			if (last == null) {
+				continue;
+			}
+			System.out.println("Last passing time " + last.getPassingTime());
 			lastEntries.add(new LocationResponse(last.getLatitude(), last.getLongitude()));
 		}
 		
 		return lastEntries;
 	}
-
+	
+	
+	/**
+	 * Returns all existing lines
+	 * @return list of lines
+	 */
+	@RequestMapping("/get-lines")
+	@ResponseBody
+	public List<String> getLines() {
+		List<String> lines = new ArrayList<String>();
+		
+		List<Line> allLines = lineService.getAllLines();
+		
+		for (Line l : allLines) {
+			lines.add(l.getLineNo());
+		}
+		
+		return lines;
+	}
 }
+
 
 class LocationResponse {
 	private double lat;
@@ -64,8 +97,6 @@ class LocationResponse {
 	public double getLongi() {
 		return longi;
 	}
-	
-	
 }
 
 

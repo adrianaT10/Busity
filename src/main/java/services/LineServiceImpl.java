@@ -2,6 +2,7 @@ package services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ public class LineServiceImpl implements LineService {
 	LineRepository lineRepo;
 	
 	public List<Line> getAllLines() {
-		// TODO Auto-generated method stub
 		return lineRepo.findAll();
 	}
 	
@@ -28,4 +28,7 @@ public class LineServiceImpl implements LineService {
 		return lineRepo.findOne(lineNo);
 	}
 
+	public Set<Line> getAllLineswithStations() {
+		return lineRepo.findAllLinesWithStations();
+	}
 }

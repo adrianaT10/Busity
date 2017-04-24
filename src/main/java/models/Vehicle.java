@@ -1,9 +1,7 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,28 +17,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
-	
+
 	@ManyToOne
-    @JoinColumn(name = "line_no")
+	@JoinColumn(name = "line_no")
 	private Line line;
-	
+
 	@Id
 	@Column(name = "registration_no", unique = true)
 	private String registrationNo;
-	
+
 	@Column(name = "vehicle_type")
 	@Enumerated(EnumType.STRING)
 	private VehicleType vehicleType;
-	
+
 	private String brand;
-	
+
 	@OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
 	private List<LogEntry> logEntries = new ArrayList<LogEntry>();
-	
-	
+
 	
 	public Vehicle() {}
-	
+
 	public Vehicle(String registrationNo, VehicleType vehicleType, String brand) {
 		this.registrationNo = registrationNo;
 		this.vehicleType = vehicleType;
@@ -53,6 +50,9 @@ public class Vehicle {
 
 	public void setLine(Line line) {
 		this.line = line;
+		if (line != null) {
+			line.addVehicle(this);
+		}
 	}
 
 	public String getRegistrationNo() {
@@ -86,10 +86,9 @@ public class Vehicle {
 	public void setLogEntries(List<LogEntry> logEntries) {
 		this.logEntries = logEntries;
 	}
-	
+
 	public boolean addLogEntry(LogEntry logEntry) {
 		return this.logEntries.add(logEntry);
 	}
-	
-	
+
 }

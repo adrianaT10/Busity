@@ -14,6 +14,9 @@
 		<url-pattern>/register</url-pattern>
 		<url-pattern>/unregister</url-pattern>
 		<url-pattern>/update-location</url-pattern>
+		<url-pattern>/get-lines</url-pattern>
 		<url-pattern>/r/line</url-pattern>
+		<url-pattern>/statistics</url-pattern>
+		<url-pattern>/stat</url-pattern>
 	</servlet-mapping>
 </web-app>  

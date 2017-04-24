@@ -21,5 +21,4 @@ public class StationServiceImpl implements StationService {
 	public Station save(Station station) {
 		return stationRepo.save(station);
 	}
-
 }
