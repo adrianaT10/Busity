@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -19,6 +21,9 @@ public class Line {
 	@Id
 	@Column(name = "line_no")
 	private String lineNo;
+	
+	@Enumerated(EnumType.STRING)
+	private VehicleType type;
 
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "line", cascade = CascadeType.ALL)
@@ -84,5 +89,13 @@ public class Line {
 	
 	public boolean addAwt(Awt awt) {
 		return this.waitingTimes.add(awt);
+	}
+
+	public VehicleType getType() {
+		return type;
+	}
+
+	public void setType(VehicleType type) {
+		this.type = type;
 	}
 }

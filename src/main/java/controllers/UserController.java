@@ -68,13 +68,13 @@ public class UserController {
 	 */
 	@RequestMapping("/get-lines")
 	@ResponseBody
-	public List<String> getLines() {
-		List<String> lines = new ArrayList<String>();
+	public List<LineResponse> getLines() {
+		List<LineResponse> lines = new ArrayList<LineResponse>();
 		
 		List<Line> allLines = lineService.getAllLines();
 		
 		for (Line l : allLines) {
-			lines.add(l.getLineNo());
+			lines.add(new LineResponse(l.getLineNo(), l.getType().name()));
 		}
 		
 		return lines;
@@ -97,6 +97,26 @@ class LocationResponse {
 	public double getLongi() {
 		return longi;
 	}
+}
+
+class LineResponse {
+	private String lineNo;
+	private String type;
+	
+	public LineResponse(String lineNo, String type) {
+		this.lineNo = lineNo;
+		this.type = type;
+	}
+
+	public String getLineNo() {
+		return lineNo;
+	}
+
+	public String getType() {
+		return type;
+	}
+	
+	
 }
 
 
