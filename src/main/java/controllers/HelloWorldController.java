@@ -35,32 +35,48 @@ public class HelloWorldController {
 	@RequestMapping("/rest")
 	@ResponseBody
 	public String getAllPlayedMatches() {
-	    Line l = new Line("139");
-	    Line l2 = new Line("136");
-	    
-	    Vehicle v1 = new Vehicle("123gh", VehicleType.BUS, "Mercedes");
-	    l.addVehicle(v1);
-	    v1.setLine(l);
-//	    vehicleService.save(v1);
-	    Vehicle v2 = new Vehicle("234rt", VehicleType.BUS, "Mercedes");
-	    l.addVehicle(v2);
-	    v2.setLine(l);
-//	    vehicleService.save(v2);
-	    
-	    Station s1 = new Station("13Sept", 23.3444, 25.4445);
-	    l2.addStation(s1);
-	    s1.addLine(l2);
-	    s1.addLine(l);
+//	    Line l1 = new Line("1");
+//	    Line l2 = new Line("25");
+//	    
+//	    lineService.save(l1);
+//	    lineService.save(l2);
+//
+//	    Station s1 = new Station("Calea 13 Septembrie", 44.422902, 26.069308);  
+//	    Station s2 = new Station("APRODEX", 44.425739, 26.065578);
+//	    Station s3 = new Station("Piata Danny Huwe", 44.428849, 26.061827);
+//        
 //	    stationService.save(s1);
+//	    stationService.save(s2);
+//	    stationService.save(s3);
+//	    
+//	    s1.addLine(l1);
+//	    s1.addLine(l2);
+//	    stationService.save(s1);
+//	    
+//	    s2.addLine(l1);
+//	    s2.addLine(l2);
+//	    stationService.save(s2);
+//	    
+//	    s3.addLine(l1);
+//	    s3.addLine(l2);
+//	    stationService.save(s3);
+//	    
+//	    Vehicle v1 = new Vehicle("11abc", VehicleType.TRAM, "");
+//	    Vehicle v2 = new Vehicle("22abc", VehicleType.TRAM, "");
+//	    
+//	    v1.setLine(l1);
+//	    v2.setLine(l1);
+////	    l1.addVehicle(v1);
+////	    l1.addVehicle(v2);
+//	    lineService.save(l1);
+//	    lineService.save(l2);
 	    
-	    lineService.save(l);
-	    lineService.save(l2);
-	    
-//	    vehicleService.delete(v1);
-	    Set<Vehicle> remaining = l.getVehicles();
-//	    remaining.clear();
-	    System.out.println(remaining.size());
+	    Set<Line> lines = lineService.getAllLineswithStations();
+	    for (Line line : lines) {
+	    	System.out.println(line.getLineNo() + " " + line.getStations().size());
+	    }
 	    
 	    return "mergeee";
 	}
+	
 }

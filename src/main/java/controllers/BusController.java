@@ -50,11 +50,6 @@ public class BusController {
 			return new ResponseMessage(Message.ERROR, Message.UNREGISTERED_VEHICLE);
 		}
 		
-		// if vehicle is already registered on this line, do nothing
-		if (vehicle.getLine().getLineNo() == line.getLineNo()) {
-			return new ResponseMessage(Message.SUCCESS, "");
-		}
-		
 		// update vehicle's line
 		vehicle.setLine(line);
 		vehicleService.save(vehicle);
@@ -79,8 +74,6 @@ public class BusController {
 			return new ResponseMessage(Message.ERROR, Message.UNREGISTERED_VEHICLE);
 		}
 		
-		System.out.println(vehicle.getLine().getLineNo());
-		
 		vehicle.setLine(null);
 		vehicleService.save(vehicle);
 		
@@ -99,7 +92,7 @@ public class BusController {
 	@ResponseBody
 	public void updateLocation(@RequestParam(value="registr")String registrationNo,
 			@RequestParam(value="lat")double latitude, @RequestParam(value="long")double longitude,
-			@RequestParam(value="date") @DateTimeFormat(pattern = "MMddyyyyHHmm") Date date) {
+			@RequestParam(value="date") @DateTimeFormat(pattern = "MMddyyyyHHmmss") Date date) {
 		Vehicle vehicle = vehicleService.findVehicle(registrationNo).orElse(null);
 		if (vehicle == null) {
 			System.err.println(Message.UNREGISTERED_VEHICLE);
