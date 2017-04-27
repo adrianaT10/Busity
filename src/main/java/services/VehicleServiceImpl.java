@@ -28,15 +28,6 @@ public class VehicleServiceImpl implements VehicleService {
 		return vehicleRepo.save(vehicle);
 	}
 
-	public void delete(Vehicle vehicle) {
-		vehicleRepo.delete(vehicle);
-	}
-	
-	public void update(Vehicle updated) {
-		vehicleRepo.updateLine(updated.getRegistrationNo(), updated.getLine());
-		vehicleRepo.flush();
-	}
-
 	public LogEntry getLastPosition(Vehicle vehicle) {
 		Vehicle v = vehicleRepo.findByRegistrNoAndFetchLogs(vehicle.getRegistrationNo());
 		if (v == null || v.getLogEntries().isEmpty()) 

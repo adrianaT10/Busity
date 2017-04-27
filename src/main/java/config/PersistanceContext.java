@@ -54,9 +54,9 @@ public class PersistanceContext {
  
         //Specifies the action that is invoked to the database when the Hibernate
         //SessionFactory is created or closed.
-        jpaProperties.put("hibernate.hbm2ddl.auto", 
-                env.getRequiredProperty("hibernate.hbm2ddl.auto")
-        );
+//        jpaProperties.put("hibernate.hbm2ddl.auto", 
+//                env.getRequiredProperty("hibernate.hbm2ddl.auto")
+//        );
  
         //Configures the naming strategy that is used when Hibernate creates
         //new database objects and schema elements

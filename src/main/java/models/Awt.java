@@ -26,7 +26,7 @@ public class Awt {
 	private long id;
 
 	@ManyToOne
-	@JoinColumn(name = "station_name")
+	@JoinColumn(name = "station_id")
 	private Station station;
 
 	@ManyToOne

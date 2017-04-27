@@ -13,10 +13,6 @@ public interface VehicleService {
 	
 	public Vehicle save(Vehicle vehicle);
 	
-	public void delete(Vehicle vehicle);
-	
-	public void update(Vehicle updated);
-	
 	public LogEntry getLastPosition(Vehicle vehicle);
 	
 }

@@ -40,7 +40,7 @@ public class BusController {
 	 * @return success/ error JSON reponse
 	 */
 	@RequestMapping("/register")
-	public @ResponseBody ResponseMessage registerLine(@RequestParam(value="line")String lineNo, 
+	public @ResponseBody ResponseMessage registerVehicleWithLine(@RequestParam(value="line")String lineNo, 
 			@RequestParam(value="registr")String registrationNo) {
 		Line line = lineService.findLine(lineNo).orElse(null);
 		if (line == null) {

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,11 +78,10 @@ public class StatisticsController {
 	
 	/**
 	 * Computes average waiting times;
-	 * Should be called once per day
+	 * Scheduled to be run once a day
 	 */
 	@SuppressWarnings("deprecation")
-	@RequestMapping("/statistics")
-	@ResponseBody
+	@Scheduled(cron ="0 8 22 * * ?", zone="Europe/Sofia")
 	public void computeStatistics() {
 		Set<LogEntry> entries = logEntryService.getTodaysEntries();
 

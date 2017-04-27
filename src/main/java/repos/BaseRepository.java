@@ -17,6 +17,4 @@ public interface BaseRepository<T, ID extends Serializable> extends Repository<T
     Optional<T> findOne(ID id);
  
     T save(T persisted);
-    
-    void flush();
 }
